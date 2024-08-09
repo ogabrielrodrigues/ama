@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:15
+    restart: unless-stopped
+    ports:
+      - ${AMA_DATABASE_PORT:-5432}:5432
+    environment:
+      POSTGRES_USER: ${AMA_DATABASE_USER}
+      POSTGRES_PASSWORD: ${AMA_DATABASE_PASSWORD}
+      POSTGRES_DB: ${AMA_DATABASE_NAME}
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
+    driver: local
